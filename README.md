@@ -4,7 +4,7 @@ Website restoran **De Roemah Makan** yang dibangun menggunakan **Laravel 13** + 
 
 ## 📋 Deskripsi
 
-Website ini merupakan rekonstruksi dari versi sebelumnya (React + TypeScript + Convex) menjadi full PHP menggunakan Laravel Framework. Website menyediakan fitur menu makanan, keranjang belanja, checkout pesanan, booking meja, dan panel admin untuk mengelola data.
+Website ini merupakan projectfull PHP menggunakan Laravel Framework. Website menyediakan fitur menu makanan, keranjang belanja, checkout pesanan, booking meja, dan panel admin untuk mengelola data.
 
 ## 🛠️ Teknologi
 
