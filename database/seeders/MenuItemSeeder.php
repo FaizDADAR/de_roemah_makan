@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\MenuItem;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class MenuItemSeeder extends Seeder
 {
@@ -159,6 +160,9 @@ class MenuItemSeeder extends Seeder
         ];
 
         foreach ($items as $item) {
+            if (empty($item['image_url'])) {
+                $item['image_url'] = '/images/menu/' . Str::slug($item['name']) . '.jpg';
+            }
             MenuItem::create($item);
         }
     }
