@@ -260,8 +260,9 @@
                 } else {
                     drawerItems.innerHTML = cartData.cart.map(item => `
                         <div class="flex gap-3 p-3 rounded-2xl" style="background: #FAF8F6; border: 1px solid #EDE8E3;">
-                            <img src="${item.image_url}" alt="${item.name}" class="w-16 h-16 rounded-xl object-cover flex-shrink-0"
-                                onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80'">
+                            <div class="w-16 h-16 rounded-xl flex-shrink-0 flex items-center justify-center text-2xl" style="background: linear-gradient(135deg, #F5E6D3, #EDD5BC);">
+                                🍽️
+                            </div>
                             <div class="flex-1 min-w-0">
                                 <p class="font-semibold text-sm text-gray-800 truncate">${item.name}</p>
                                 <p class="text-xs mt-0.5 font-medium" style="color: #8B5E3C;">${formatRupiah(item.price)}</p>

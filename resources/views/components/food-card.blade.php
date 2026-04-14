@@ -1,13 +1,23 @@
 {{-- FoodCard Component --}}
 {{-- Usage: @include('components.food-card', ['item' => $menuItem]) --}}
 <div class="food-card group">
-    {{-- Image --}}
-    <div class="relative h-40 overflow-hidden bg-gray-100 flex-shrink-0">
-        <img src="{{ $item->image_url }}" alt="{{ $item->name }}"
-             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-             onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80'">
+    {{-- Image / Placeholder --}}
+    <div class="relative h-40 overflow-hidden flex-shrink-0 flex items-center justify-center" style="background: linear-gradient(135deg, #F5E6D3, #EDD5BC);">
+        @if($item->image_url)
+            <img src="{{ $item->image_url }}" alt="{{ $item->name }}"
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                 onerror="this.parentElement.innerHTML='<span class=\'text-5xl\'>🍽️</span>'">
+        @else
+            @php
+                $emojis = [
+                    'Hidangan Utama' => '🍛', 'Kue Kering' => '🍪', 'Kue Basah' => '🧁',
+                    'Gorengan' => '🍟', 'Kerupuk' => '🥨', 'Minuman' => '🥤',
+                ];
+            @endphp
+            <span class="text-5xl">{{ $emojis[$item->category] ?? '🍽️' }}</span>
+        @endif
         {{-- Overlay gradient --}}
-        <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(0,0,0,0.25) 0%, transparent 50%);"></div>
+        <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(to top, rgba(0,0,0,0.15) 0%, transparent 50%);"></div>
 
         {{-- Badges top-left --}}
         <div class="absolute top-2 left-2 flex flex-col gap-1">
