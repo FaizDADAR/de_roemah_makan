@@ -130,11 +130,11 @@ Keranjang belanja menggunakan **session-based cart** yang dikelola melalui AJAX 
 
 ## 📝 Catatan Pengembangan
 
-- Project ini merupakan migrasi dari React + Convex ke Laravel + Filament
+- Project ini merupakan Laravel + Filament
 - Desain menggunakan color scheme coklat warm (#8B5E3C) yang konsisten
 - Semua data menu di-seed dari data asli project React (16 menu items)
-- Order items dinormalisasi ke tabel terpisah (sebelumnya embedded array di Convex)
-- Cart menggunakan Laravel Session (menggantikan React useState)
+- Order items dinormalisasi ke tabel terpisah
+- Cart menggunakan Laravel Session
 
 ## 📜 Lisensi
 
