@@ -15,11 +15,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
+        // Buat admin user untuk Filament
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin De Roemah Makan',
+            'email' => 'raihansql.dev@gmail.com',
+            'password' => bcrypt('password123'),
+        ]);
+
+        // Seed menu items
+        $this->call([
+            MenuItemSeeder::class,
         ]);
     }
 }

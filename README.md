@@ -1,58 +1,147 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# De Roemah Makan - Website Restoran
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Website restoran **De Roemah Makan** yang dibangun menggunakan **Laravel 13** + **Filament Admin Panel v5**.
 
-## About Laravel
+## 📋 Deskripsi
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Website ini merupakan rekonstruksi dari versi sebelumnya (React + TypeScript + Convex) menjadi full PHP menggunakan Laravel Framework. Website menyediakan fitur menu makanan, keranjang belanja, checkout pesanan, booking meja, dan panel admin untuk mengelola data.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠️ Teknologi
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Framework**: Laravel 13
+- **Admin Panel**: Filament v5
+- **Database**: MySQL 8
+- **Styling**: TailwindCSS v3 (CDN)
+- **Font**: Inter (Google Fonts)
 
-## Learning Laravel
+## 📁 Struktur Penting
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```
+app/
+├── Filament/Resources/          # Resource admin (MenuItem, Order, Booking)
+├── Http/Controllers/            # Controller frontend
+│   ├── HomeController.php       # Halaman beranda
+│   ├── MenuController.php       # Daftar menu + filter
+│   ├── BookingController.php    # Form booking meja
+│   ├── OrderController.php      # Checkout pesanan
+│   ├── StatusController.php     # Cek status pesanan/booking
+│   └── CartController.php       # API keranjang (AJAX)
+└── Models/                      # Eloquent models
+    ├── MenuItem.php
+    ├── Order.php
+    ├── OrderItem.php
+    └── Booking.php
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+resources/views/
+├── layouts/app.blade.php        # Layout utama
+├── components/                  # Komponen Blade
+│   ├── navbar.blade.php
+│   ├── sidebar.blade.php
+│   ├── food-card.blade.php
+│   └── cart-drawer.blade.php
+└── pages/                       # Halaman
+    ├── home.blade.php
+    ├── menu.blade.php
+    ├── booking.blade.php
+    ├── checkout.blade.php
+    └── status.blade.php
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## 🚀 Instalasi
 
-## Contributing
+### Prasyarat
+- PHP 8.2+
+- Composer
+- MySQL 8+
+- ext-intl (PHP extension)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Langkah-langkah
 
-## Code of Conduct
+1. **Clone repository**
+   ```bash
+   git clone <repo-url>
+   cd de_roemah_makan
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. **Install dependencies**
+   ```bash
+   composer install
+   ```
 
-## Security Vulnerabilities
+3. **Konfigurasi environment**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+4. **Setup database**
+   - Buat database MySQL: `de_roemah_makan`
+   - Sesuaikan kredensial di file `.env`
 
-## License
+5. **Jalankan migration & seeder**
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+6. **Jalankan server**
+   ```bash
+   php artisan serve
+   ```
+
+7. **Akses website**
+   - Frontend: `http://localhost:8000`
+   - Admin Panel: `http://localhost:8000/admin`
+
+## 👤 Akun Admin
+
+| Field    | Value                      |
+|----------|----------------------------|
+| Email    | raihansql.dev@gmail.com    |
+| Password | password123                |
+
+## 📄 Halaman & Fitur
+
+### Frontend (User)
+| Halaman | URL | Deskripsi |
+|---------|-----|-----------|
+| Beranda | `/` | Banner hero, menu rekomendasi & populer |
+| Menu | `/menu` | Daftar menu dengan filter kategori, pencarian, ketersediaan, harga |
+| Booking | `/booking` | Form reservasi meja |
+| Checkout | `/checkout` | Checkout pesanan dari keranjang |
+| Status | `/status` | Cek status pesanan & booking via nomor HP |
+
+### Admin Panel (Filament)
+| Resource | Deskripsi |
+|----------|-----------|
+| Menu Items | CRUD data menu (nama, harga, kategori, gambar, badges) |
+| Pesanan | Kelola pesanan (lihat detail, ubah status) |
+| Booking | Kelola booking meja (lihat detail, ubah status) |
+
+## 🗂️ Kategori Menu
+- 🍛 Hidangan Utama
+- 🍪 Kue Kering
+- 🧁 Kue Basah
+- 🍟 Gorengan
+- 🥨 Kerupuk
+- 🥤 Minuman
+
+## 🛒 Sistem Keranjang
+
+Keranjang belanja menggunakan **session-based cart** yang dikelola melalui AJAX endpoint:
+- `POST /cart/add` - Tambah item
+- `POST /cart/update` - Update quantity
+- `POST /cart/remove` - Hapus item
+- `POST /cart/clear` - Kosongkan keranjang
+- `GET /cart` - Get data keranjang
+
+## 📝 Catatan Pengembangan
+
+- Project ini merupakan migrasi dari React + Convex ke Laravel + Filament
+- Desain menggunakan color scheme coklat warm (#8B5E3C) yang konsisten
+- Semua data menu di-seed dari data asli project React (16 menu items)
+- Order items dinormalisasi ke tabel terpisah (sebelumnya embedded array di Convex)
+- Cart menggunakan Laravel Session (menggantikan React useState)
+
+## 📜 Lisensi
+
+Hak Cipta © {{ date('Y') }} De Roemah Makan. Semua hak dilindungi.
