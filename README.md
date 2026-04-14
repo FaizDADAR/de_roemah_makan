@@ -92,12 +92,6 @@ resources/views/
    - Frontend: `http://localhost:8000`
    - Admin Panel: `http://localhost:8000/admin`
 
-## 👤 Akun Admin
-
-| Field    | Value                      |
-|----------|----------------------------|
-| Email    | raihansql.dev@gmail.com    |
-| Password | password123                |
 
 ## 📄 Halaman & Fitur
 
