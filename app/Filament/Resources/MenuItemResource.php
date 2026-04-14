@@ -5,23 +5,27 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\MenuItemResource\Pages;
 use App\Models\MenuItem;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 
 class MenuItemResource extends Resource
 {
     protected static ?string $model = MenuItem::class;
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-clipboard-document-list';
     protected static ?string $navigationLabel = 'Menu Items';
     protected static ?string $modelLabel = 'Menu Item';
-    protected static ?string $navigationGroup = 'Restoran';
     protected static ?int $navigationSort = 1;
 
-    public static function form(Form $form): Form
+    public static function getNavigationGroup(): ?string
     {
-        return $form->schema([
+        return 'Restoran';
+    }
+
+    public static function form(Schema $schema): Schema
+    {
+        return $schema->components([
             Forms\Components\Section::make('Informasi Menu')->schema([
                 Forms\Components\TextInput::make('name')
                     ->label('Nama Menu')

@@ -5,23 +5,27 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BookingResource\Pages;
 use App\Models\Booking;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 
 class BookingResource extends Resource
 {
     protected static ?string $model = Booking::class;
-    protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-calendar-days';
     protected static ?string $navigationLabel = 'Booking';
     protected static ?string $modelLabel = 'Booking';
-    protected static ?string $navigationGroup = 'Restoran';
     protected static ?int $navigationSort = 3;
 
-    public static function form(Form $form): Form
+    public static function getNavigationGroup(): ?string
     {
-        return $form->schema([
+        return 'Restoran';
+    }
+
+    public static function form(Schema $schema): Schema
+    {
+        return $schema->components([
             Forms\Components\Section::make('Informasi Booking')->schema([
                 Forms\Components\TextInput::make('customer_name')
                     ->label('Nama Pelanggan')
