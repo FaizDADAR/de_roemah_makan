@@ -72,7 +72,7 @@ class MenuItemSeeder extends Seeder
             [
                 'name' => 'Kue Lapis',
                 'description' => 'Kue basah berlapis warna-warni yang kenyal',
-                'price' => 20.000,
+                'price' => 20000,
                 'category' => 'Kue Basah',
                 'image_url' => '',
                 'available' => true,

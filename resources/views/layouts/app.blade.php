@@ -125,8 +125,12 @@
         const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
         // Format ke Rupiah
-        function formatRupiah(n) {
-            return 'Rp ' + n.toLocaleString('id-ID');
+        function formatRupiah(harga) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(harga);
         }
 
         // Toast auto-remove
