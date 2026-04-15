@@ -109,10 +109,10 @@ class MenuItemSeeder extends Seeder
             [
                 'name' => 'Tempe Mendoan',
                 'description' => 'Tempe tipis goreng tepung bumbu khas Banyumas',
-                'price' => 4000,
+                'price' => 1000,
                 'category' => 'Gorengan',
                 'image_url' => '',
-                'available' => false,
+                'available' => true,
             ],
             [
                 'name' => 'Kerupuk Udang',
@@ -155,7 +155,7 @@ class MenuItemSeeder extends Seeder
                 'price' => 12000,
                 'category' => 'Minuman',
                 'image_url' => '',
-                'available' => false,
+                'available' => true,
             ],
         ];
 
