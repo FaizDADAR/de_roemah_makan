@@ -14,7 +14,7 @@ class MenuItemSeeder extends Seeder
             [
                 'name' => 'Nasi Goreng Spesial',
                 'description' => 'Nasi goreng dengan telur, ayam, dan sayuran segar',
-                'price' => 15.000,
+                'price' => 15000,
                 'category' => 'Hidangan Utama',
                 'image_url' => '',
                 'available' => true,
@@ -25,7 +25,7 @@ class MenuItemSeeder extends Seeder
             [
                 'name' => 'Mie Ayam Bakso',
                 'description' => 'Mie kenyal dengan ayam cincang dan bakso sapi',
-                'price' => 15.000,
+                'price' => 15000,
                 'category' => 'Hidangan Utama',
                 'image_url' => '',
                 'available' => true,
@@ -35,7 +35,7 @@ class MenuItemSeeder extends Seeder
             [
                 'name' => 'Soto Ayam',
                 'description' => 'Soto kuning dengan ayam suwir dan pelengkap',
-                'price' => 12.000,
+                'price' => 12000,
                 'category' => 'Hidangan Utama',
                 'image_url' => '',
                 'available' => true,
@@ -44,7 +44,7 @@ class MenuItemSeeder extends Seeder
             [
                 'name' => 'Gado-Gado',
                 'description' => 'Sayuran segar dengan bumbu kacang khas',
-                'price' => 10.000,
+                'price' => 10000,
                 'category' => 'Hidangan Utama',
                 'image_url' => '',
                 'available' => true,
@@ -53,7 +53,7 @@ class MenuItemSeeder extends Seeder
             [
                 'name' => 'Kue Nastar',
                 'description' => 'Kue kering isi selai nanas, renyah dan lezat',
-                'price' => 20.000,
+                'price' => 20000,
                 'category' => 'Kue Kering',
                 'image_url' => '',
                 'available' => true,
@@ -63,7 +63,7 @@ class MenuItemSeeder extends Seeder
             [
                 'name' => 'Kue Putri Salju',
                 'description' => 'Kue kering bertabur gula halus yang lembut',
-                'price' => 18.000,
+                'price' => 18000,
                 'category' => 'Kue Kering',
                 'image_url' => '',
                 'available' => true,
