@@ -119,22 +119,28 @@ resources/views/
 - 🥨 Kerupuk
 - 🥤 Minuman
 
-## 🛒 Sistem Keranjang
+## 🛒 Sistem Keranjang & Checkout
 
-Keranjang belanja menggunakan **session-based cart** yang dikelola melalui AJAX endpoint:
+Keranjang belanja menggunakan **session-based cart** yang dikelola melalui AJAX endpoint secara dinamis dengan Drawer UI (Animasi Laci).
 - `POST /cart/add` - Tambah item
 - `POST /cart/update` - Update quantity
 - `POST /cart/remove` - Hapus item
 - `POST /cart/clear` - Kosongkan keranjang
 - `GET /cart` - Get data keranjang
 
+### Fitur Spesifik Checkout (WhatsApp)
+1. **Pemesanan via WhatsApp**: Setelah user mengisi data diri, sistem akan generate pesan rapi dan mem-forward ke WhatsApp Admin. 
+2. **Hidden Prices**: Demi keamanan transaksi dan meminimalisir manipulasi harga dari sisi client, format pemesanan WhatsApp **tidak menyertakan harga/total**. Total akan dikonfirmasi langsung oleh admin.
+3. **Format Rupiah Dinamis (Intl.NumberFormat)**: Menggunakan formatting standar regional IDR via Javascript tanpa angka desimal belakang.
+4. **Geolocation API**: Opsi "Ambil Lokasi Saya" menggunakan GPS perangkat lalu melampirkan letak ordinat Google Maps ke dalam field alamat.
+
 ## 📝 Catatan Pengembangan
 
 - Project ini merupakan Laravel + Filament
 - Desain menggunakan color scheme coklat warm (#8B5E3C) yang konsisten
-- Semua data menu di-seed dari data asli project React (16 menu items)
-- Order items dinormalisasi ke tabel terpisah
-- Cart menggunakan Laravel Session
+- Semua data menu di-seed dari data awal. Telah diperbaiki menjadi integer murni standar ribuan (contoh: 15.000 menjadi 15000 pada seeder)
+- Order items disiapkan secara dinamis dan cart tidak menghilang apabila tidak di-checkout.
+- Cart menggunakan Laravel Session yang dipanggil ulang dengan JS fetch.
 
 ## 📜 Lisensi
 
