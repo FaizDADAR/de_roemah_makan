@@ -92,6 +92,23 @@
         .toast-error { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
         @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes fadeOut { to { opacity: 0; transform: translateX(100%); } }
+        
+        /* Smooth Global Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        
+        /* Interactive click effect */
+        .btn-primary:active, button:active { transform: scale(0.97); transition: transform 0.1s; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col" style="background: #F4F6F9;">

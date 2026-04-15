@@ -6,7 +6,7 @@
 <div class="flex flex-col gap-8">
 
     {{-- Banner Hero --}}
-    <div class="rounded-3xl p-8 md:p-12 relative overflow-hidden"
+    <div class="animate-fade-in-up rounded-3xl p-8 md:p-12 relative overflow-hidden"
          style="background: linear-gradient(135deg, #8B5E3C 0%, #C0392B 100%);">
         <div class="relative z-10 max-w-lg">
             <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold mb-4"
@@ -35,7 +35,7 @@
     </div>
 
     {{-- Info Strip --}}
-    <div class="grid grid-cols-3 gap-3">
+    <div class="grid grid-cols-3 gap-3 animate-fade-in-up delay-100">
         @php
             $infoItems = [
                 ['icon' => '🕐', 'label' => 'Jam Buka', 'value' => '08.00 – 21.00'],
@@ -53,7 +53,7 @@
     </div>
 
     {{-- Menu Rekomendasi --}}
-    <section>
+    <section class="animate-fade-in-up delay-200">
         <div class="flex items-center justify-between mb-4">
             <h2 class="text-lg font-bold text-gray-800">Menu Rekomendasi</h2>
             <a href="{{ route('menu') }}" class="flex items-center gap-1 text-sm font-medium transition" style="color: #8B5E3C;">
@@ -73,7 +73,7 @@
     </section>
 
     {{-- Menu Populer --}}
-    <section>
+    <section class="animate-fade-in-up delay-300">
         <div class="flex items-center justify-between mb-4">
             <h2 class="text-lg font-bold text-gray-800">Menu Populer</h2>
             <a href="{{ route('menu') }}" class="flex items-center gap-1 text-sm font-medium transition" style="color: #8B5E3C;">
