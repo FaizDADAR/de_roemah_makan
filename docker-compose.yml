@@ -4,6 +4,8 @@ services:
             context: .
             dockerfile: Dockerfile
         container_name: de_roemah_makan_app
+        ports:
+            - "8000:8000"
         volumes:
             - .:/var/www
         networks:
