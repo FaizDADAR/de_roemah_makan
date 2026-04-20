@@ -1,15 +1,31 @@
 services:
-  db:
-    image: mysql:8
-    container_name: de_roemah_db
-    restart: always
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_DATABASE=deroemah
-    ports:
-      - "3306:3306"
-    volumes:
-      - db_data:/var/lib/mysql
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: de_roemah_makan_app
+        volumes:
+            - .:/var/www
+        networks:
+            - deroemahmakan
+
+    db:
+        image: mysql:8
+        container_name: de_roemah_db
+        restart: always
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_DATABASE=deroemahmakan
+        ports:
+            - "3306:3306"
+        volumes:
+            - db_data:/var/lib/mysql
+        networks:
+            - deroemahmakan
+
+networks:
+    deroemahmakan:
+        driver: bridge
 
 volumes:
-  db_data:
+    db_data:
