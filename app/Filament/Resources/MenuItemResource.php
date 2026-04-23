@@ -54,7 +54,6 @@ class MenuItemResource extends Resource
                 Forms\Components\TextInput::make('image_url')
                     ->label('URL Gambar')
                     ->required()
-                    ->url()
                     ->maxLength(500),
             ])->columns(2),
 
@@ -78,10 +77,9 @@ class MenuItemResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image_url')
+                Tables\Columns\TextColumn::make('image_url')
                     ->label('Foto')
-                    ->circular()
-                    ->size(40),
+                    ->formatStateUsing(fn ($state) => new \Illuminate\Support\HtmlString("<img src='".asset($state)."' class='w-10 h-10 rounded-full object-cover shadow-sm'>")),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
                     ->searchable()
