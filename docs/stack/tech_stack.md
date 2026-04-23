@@ -7,6 +7,7 @@ Aplikasi ini dibangun menggunakan teknologi modern untuk memastikan performa tin
 - **PHP**: ^8.4 (Mendukung fitur-fitur terbaru PHP)
 - **Database**: MySQL 8.0
 - **Admin Panel**: Filament 5 (Unified Schema System)
+- **Database Manager**: phpMyAdmin (Web-based Interface)
 
 ## Frontend
 - **CSS**: Tailwind CSS (via Vite)
@@ -16,7 +17,10 @@ Aplikasi ini dibangun menggunakan teknologi modern untuk memastikan performa tin
 ## Infrastructure
 - **Containerization**: Docker Compose
 - **Web Server**: PHP Built-in Server (Artisan Serve) yang berjalan di dalam container.
-- **Port Mapping**: `:8000` (Web) & `:3306` (Database)
+- **Port Mapping**: 
+  - `:8000` (Web Application)
+  - `:8081` (phpMyAdmin)
+  - `:3306` (Database MySQL)
 
 ## Environment Configuration
 - **DB_HOST**: `db` (Nama service database di Docker network)

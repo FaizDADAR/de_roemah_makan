@@ -12,6 +12,7 @@ Selamat datang di pusat dokumentasi resmi proyek **De Roemah Makan**. Dokumentas
 ## 🛠️ Teknis & Pengembangan
 - **[Tech Stack Overview](stack/tech_stack.md)**: Daftar teknologi dan paket yang digunakan dalam proyek.
 - **[Code Snippets & Logic](snippets/checkout_logic.md)**: Referensi koding untuk fitur-fitur krusial.
+- **[Development Change Log](development/change_log.md)**: Catatan perbaikan bug dan update harian.
 - **[Development Roadmap](management/project_roadmap.md)**: Status proyek saat ini dan rencana pengembangan masa depan.
 
 ## 📖 Panduan Pengguna

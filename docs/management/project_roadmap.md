@@ -16,6 +16,8 @@ Dokumen ini melacak kemajuan proyek De Roemah Makan dan merencanakan pengembanga
 - [x] Penambahan Dashboard Analytics & Charts.
 - [x] Fitur Export Laporan Keuangan (CSV).
 - [x] Pencatatan pesanan otomatis via AJAX sebelum redirect.
+- [x] Integrasi **phpMyAdmin** via Docker (Port 8081).
+- [x] Perbaikan namespace **EditAction** pada seluruh Resource Admin.
 
 ## Roadmap Masa Depan
 
