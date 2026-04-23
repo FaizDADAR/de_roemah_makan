@@ -1,85 +1,127 @@
-# Panduan Instalasi Sistem
+# Panduan Instalasi Sistem Komprehensif (Arch Linux)
 
-Dokumen ini merupakan standar operasional prosedur untuk melakukan instalasi dan konfigurasi sistem De Roemah Makan pada lingkungan baru.
+Dokumen ini menyajikan instruksi teknis mendalam untuk melakukan setup lingkungan pengembangan dari sistem operasi Arch Linux yang masih murni (*fresh install*) hingga aplikasi De Roemah Makan siap dioperasikan.
 
-## 1. Prasyarat Sistem
+## 1. Persiapan Sistem Dasar
 
-Sebelum memulai proses instalasi, pastikan sistem operasi berbasis Arch Linux telah terpasang dan memiliki akses internet untuk pengunduhan dependensi.
+Pada sistem Arch Linux yang baru terpasang, beberapa paket fundamental harus diinstal untuk memfasilitasi manajemen paket dan repositori.
 
-### Instalasi Dependensi Dasar
-Lakukan instalasi paket-paket yang diperlukan melalui manajer paket sistem:
-
+### Pembaruan Database Paket
 ```bash
-sudo pacman -S git php docker docker-compose composer nodejs npm
+#jika belum tersambung ke internet  (nmcli device wifi connect "SSID_WIFI" password "PASSWORD_WIFI")
+sudo pacman -Syu
 ```
 
-## 2. Konfigurasi Runtime PHP
+### Instalasi Paket Dasar & Networking
+Aplikasi memerlukan peralatan jaringan dan kontrol versi untuk mengelola dependensi:
+```bash
+sudo pacman -S base-devel git wget curl
+```
 
-Sistem memerlukan beberapa modul PHP tertentu agar dapat beroperasi secara optimal. Modul-modul ini harus diaktifkan melalui file konfigurasi pusat.
+## 2. Konfigurasi Lingkungan Runtime (PHP & Composer)
 
-### Langkah Aktivasi Ekstensi
-1. Buka file konfigurasi menggunakan editor teks:
-   ```bash
-   sudo nano /etc/php/php.ini
-   ```
-2. Pastikan baris-baris berikut telah diaktifkan (tanpa tanda `;` di awal baris):
-   - `extension=intl`
-   - `extension=gd`
-   - `extension=pdo_mysql`
-   - `extension=zip`
-   - `extension=bcmath`
+Aplikasi dibangun menggunakan framework Laravel yang memiliki ketergantungan ketat pada versi PHP dan ekstensi tertentu.
 
-## 3. Konfigurasi Infrastruktur Docker
+### Instalasi PHP dan Ekstensi
+```bash
+sudo pacman -S php php-gd php-intl php-imagick php-sqlite php-zip composer
+```
 
-Infrastruktur berbasis kontainer digunakan untuk menjaga konsistensi lingkungan pengembangan dan produksi.
+### Konfigurasi Lanjutan php.ini
+Laravel dan Filament (Admin Panel) memerlukan beberapa modul aktif. Buka konfigurasi menggunakan editor teks:
+```bash
+sudo nano /etc/php/php.ini
+```
+Hapus tanda komentar (`;`) pada baris-baris berikut:
+- `extension=bcmath` (Perhitungan presisi tinggi)
+- `extension=calendar`
+- `extension=exif` (Manajemen metadata gambar)
+- `extension=gd` (Pemrosesan gambar menu)
+- `extension=gettext`
+- `extension=iconv`
+- `extension=intl` (Internasionalisasi)
+- `extension=mysqli`
+- `extension=pdo_mysql` (Koneksi database utama)
+- `extension=sockets`
+- `extension=zip` (Kompresi file)
 
-### Aktivasi Layanan
-Aktifkan dan jalankan layanan Docker:
+*Catatan: Pastikan `memory_limit` diset minimal ke `512M` untuk menghindari kegagalan saat menjalankan Composer.*
+
+## 3. Ekosistem Frontend (Node.js)
+
+Untuk melakukan kompilasi aset CSS (Tailwind) dan JavaScript (Vite), diperlukan runtime Node.js.
+
+```bash
+sudo pacman -S nodejs npm
+```
+
+## 4. Infrastruktur Kontainerisasi (Docker)
+
+Seluruh database dan layanan pendukung (phpMyAdmin) dijalankan di dalam kontainer untuk menjaga isolasi sistem host.
+
+### Instalasi Docker Engine
+```bash
+sudo pacman -S docker docker-compose
+```
+
+### Aktivasi dan Hak Akses
+Jalankan daemon Docker dan konfigurasikan agar berjalan otomatis saat boot:
 ```bash
 sudo systemctl enable --now docker
 ```
 
-### Manajemen Izin Akses
-Berikan izin kepada pengguna sistem untuk menjalankan instruksi Docker tanpa memerlukan hak akses root:
+Tambahkan pengguna aktif ke dalam grup `docker` agar instruksi dapat dijalankan tanpa hak akses root:
 ```bash
 sudo usermod -aG docker $USER
 ```
-*Sesi pengguna harus diperbarui (logout/login) agar perubahan hak akses dapat diterapkan.*
+*Penting: Anda harus melakukan logout dan login kembali agar perubahan grup ini diakui oleh sistem.*
 
-## 4. Inisialisasi Aplikasi
+## 5. Setup Lingkungan Kerja (Opsional namun Disarankan)
 
-### Akuisisi Kode Sumber
-Gunakan Git untuk melakukan kloning repositori ke direktori lokal:
+Untuk kenyamanan pengembangan, instalasi browser dan editor teks sangat disarankan:
 ```bash
+sudo pacman -S firefox visual-studio-code-bin
+```
+*(Catatan: Visual Studio Code mungkin memerlukan akses ke AUR atau menggunakan versi open-source `code`).*
+
+## 6. Instalasi dan Deployment Aplikasi
+
+### Kloning Proyek & Identitas Git
+Konfigurasikan identitas Git Anda terlebih dahulu:
+```bash
+git config --global user.name "Nama Anda" #contoh "wongireng"
+git config --global user.email "email@anda.com" #contoh "wongirengfiral@gmail.com"
+
 git clone https://github.com/FaizDADAR/de_roemah_makan.git
 cd de_roemah_makan
 ```
 
-### Manajemen Environment
-Inisialisasi file konfigurasi lingkungan dari template yang tersedia:
+### Inisialisasi Environment
 ```bash
 cp .env.example .env
 ```
 
-## 5. Orkerstrasi Layanan
-
-Gunakan Docker Compose untuk menginisialisasi dan menjalankan seluruh ekosistem aplikasi (Backend, Database, dan Database Manager).
-
+### Deployment Kontainer
+Proses ini akan mengunduh image MySQL dan phpMyAdmin serta membangun image aplikasi:
 ```bash
 docker-compose up -d --build
 ```
 
-## 6. Finalisasi Database
-
-Setelah seluruh kontainer beroperasi secara stabil, lakukan pembaruan skema database dan inisialisasi data awal:
-
+### Finalisasi Database
+Jalankan migrasi tabel dan seeding data awal ke dalam kontainer database:
 ```bash
 docker exec de_roemah_makan_app php artisan migrate --seed
 ```
 
-## 7. Verifikasi Akses
+## 7. Verifikasi Operasional
 
-Aksesibilitas sistem dapat diverifikasi melalui alamat berikut:
-- **Interface Pengguna**: http://localhost:8000
-- **Panel Administrasi**: http://localhost:8000/admin
-- **Manajemen Database**: http://localhost:8081
+Sistem dapat diakses melalui endpoint berikut:
+- **Web Interface**: `http://localhost:8000`
+- **Admin Dashboard**: `http://localhost:8000/admin`
+- **Database Administration**: `http://localhost:8081`
+
+### Troubleshooting Port
+Jika port `8000` telah digunakan oleh proses lain, Docker akan mencoba melakukan mapping ke port lain (misalnya `8001`). Selalu periksa status kontainer melalui:
+```bash
+docker ps
+```
