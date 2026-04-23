@@ -1,27 +1,28 @@
-# Tech Stack - De Roemah Makan
+# Spesifikasi Teknologi
 
-Aplikasi ini dibangun menggunakan teknologi modern untuk memastikan performa tinggi dan kemudahan pengembangan.
+Daftar infrastruktur dan teknologi yang digunakan dalam pengembangan aplikasi De Roemah Makan.
 
-## Core Technologies
-- **Framework**: Laravel 13 (Cutting-edge version)
-- **PHP**: ^8.4 (Mendukung fitur-fitur terbaru PHP)
+## Teknologi Inti
+- **Framework**: Laravel 13
+- **Bahasa Pemrograman**: PHP ^8.4
 - **Database**: MySQL 8.0
 - **Admin Panel**: Filament 5 (Unified Schema System)
-- **Database Manager**: phpMyAdmin (Web-based Interface)
+- **Database Manager**: phpMyAdmin (Interface Web)
 
-## Frontend
-- **CSS**: Tailwind CSS (via Vite)
-- **JavaScript**: Vanilla JS / Alpine.js (Lightweight & Reactive)
-- **Icons**: Heroicons (Outline & Solid)
+## Frontend dan Antarmuka
+- **CSS Framework**: Tailwind CSS
+- **Library JavaScript**: Vanilla JS dan Alpine.js
+- **Ikon**: Heroicons
 
-## Infrastructure
-- **Containerization**: Docker Compose
-- **Web Server**: PHP Built-in Server (Artisan Serve) yang berjalan di dalam container.
-- **Port Mapping**: 
-  - `:8000` (Web Application)
-  - `:8081` (phpMyAdmin)
-  - `:3306` (Database MySQL)
+## Infrastruktur Kontainer
+- **Orkestrasi**: Docker Compose
+- **Web Server**: PHP Built-in Server (Internal Container)
 
-## Environment Configuration
-- **DB_HOST**: `db` (Nama service database di Docker network)
-- **APP_URL**: `http://localhost:8000`
+## Konfigurasi Port
+- **Aplikasi Web**: 8000
+- **phpMyAdmin**: 8081
+- **Database MySQL**: 3306
+
+## Variabel Lingkungan Utama
+- **DB_HOST**: db
+- **APP_URL**: http://localhost:8000

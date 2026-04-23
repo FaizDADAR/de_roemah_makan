@@ -1,30 +1,34 @@
-# Development Change Log
+# Log Perubahan Pengembangan
 
-Catatan perubahan teknis harian untuk melacak perbaikan bug dan optimasi sistem.
+Histori teknis mengenai perbaikan bug, penambahan fitur, dan optimasi sistem De Roemah Makan.
 
-## [2026-04-24] - Perbaikan Admin, Docker & Dokumentasi
+## 24 April 2026
 
-### Fixed
-- **Docker Compose YAML Structure**: Memperbaiki error `volumes.phpmyadmin additional properties not allowed`. 
-  - Solusi: Memindahkan service `phpmyadmin` ke dalam blok `services:`.
-- **Form Component Namespaces**: Memperbaiki error `Class "Section" not found`.
-  - Solusi: Memisahkan pemanggilan antara `Filament\Schemas\Components` (untuk Section) dan `Filament\Forms\Components` (untuk TextInput, Select, dll).
-  - File terdampak: `MenuItemResource.php`, `OrderResource.php`, `CateringResource.php`.
-- **Artisan Serve Conflict**: Memberikan edukasi terkait konflik port 8000/8001 antara Host dan Docker.
+### Infrastruktur dan Database
+- **Integrasi phpMyAdmin**: Penambahan layanan phpMyAdmin pada konfigurasi Docker Compose untuk memudahkan manajemen database secara visual melalui port 8081.
+- **Perbaikan Konfigurasi YAML**: Optimalisasi struktur file docker-compose.yml untuk memastikan seluruh layanan berjalan secara sinkron.
 
-### Added
-- **Timeline Progress**: Menambahkan histori pengembangan dari awal proyek.
+### Panel Admin
+- **Resolusi Namespace**: Perbaikan galat Class Not Found pada komponen EditAction dan DeleteAction dengan mengimplementasikan pemanggilan namespace absolut.
+- **Standarisasi Visual**: Penyesuaian dimensi gambar pada tabel menu menjadi ukuran statis 48px dengan properti object-cover untuk estetika yang konsisten.
+
+### Frontend
+- **Koreksi Rute**: Perbaikan galat rute pada halaman beranda pasca-refaktor modul Catering untuk mencegah kegagalan pemuatan halaman.
 
 ---
 
-## [2026-04-23] - Refactor & Analytics
-- **Catering System**: Mengganti sistem Booking menjadi Catering.
-- **Dashboard Stats**: Widget statistik pendapatan dan pesanan baru.
-- **Financial Export**: Fitur export laporan ke CSV.
-- **AJAX Checkout**: Pencatatan otomatis ke database sebelum redirect WhatsApp.
+## 23 April 2026
 
-## [2026-04-22] - Initial Foundation
-- **Docker Setup**: Inisialisasi lingkungan Docker (PHP 8.4 + MySQL 8).
-- **Database Schema**: Pembuatan tabel awal (Users, Menu, Orders).
-- **Frontend UI**: Implementasi layout dasar De Roemah Makan.
-- **Admin Panel**: Setup awal Filament Admin.
+### Pengembangan Fitur
+- **Modul Catering**: Transformasi sistem Booking menjadi Catering yang mencakup deteksi bentrok jadwal dan sistem peringatan dini.
+- **Analitik Dashboard**: Implementasi widget statistik untuk pemantauan pendapatan dan tren pesanan harian.
+- **Pencatatan Otomatis**: Integrasi mekanisme AJAX pada proses checkout untuk memastikan integritas data pesanan sebelum dialihkan ke WhatsApp.
+
+---
+
+## 22 April 2026
+
+### Fondasi Sistem
+- **Setup Infrastruktur**: Inisialisasi lingkungan Docker berbasis PHP 8.4 dan MySQL 8.0.
+- **Skema Database**: Implementasi migrasi awal untuk tabel pengguna, menu, dan pesanan.
+- **Interface Dasar**: Pengembangan layout utama menggunakan Tailwind CSS dan integrasi awal Filament Admin.

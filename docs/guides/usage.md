@@ -1,27 +1,23 @@
-# Panduan Penggunaan & Operasional
+# Panduan Operasional Sistem
 
-## 1. Panel Admin (Filament)
-Akses: `/admin`
+Dokumen ini berisi instruksi penggunaan untuk panel administrasi dan pemahaman alur transaksi pelanggan pada aplikasi De Roemah Makan.
 
-### Manajemen Menu
-- Masukkan nama, deskripsi, dan harga.
-- Untuk gambar, cukup masukkan path seperti `/images/menu/nama-file.jpg`. Pastikan file gambar ada di folder `public/images/menu/`.
+## Manajemen Panel Admin
+Akses melalui alamat: `/admin`
 
-### Dashboard Stats
-- **Total Pendapatan**: Dihitung dari pesanan dengan status 'selesai'.
-- **Grafik Pesanan**: Memantau aktivitas pesanan harian.
+### Pengelolaan Menu
+- Unggah informasi produk meliputi nama, deskripsi, dan harga.
+- Penggunaan gambar: Masukkan path gambar relatif terhadap folder publik (contoh: /images/menu/produk.jpg). Pastikan aset tersedia di direktori fisik server.
 
-### Export Laporan
-- Masuk ke menu **Pesanan**.
-- Klik tombol **Export Laporan (CSV)**. File ini dapat dibuka langsung di Excel untuk pembukuan.
+### Monitoring dan Statistik
+- **Dashboard**: Menyajikan visualisasi pendapatan riil dan tren pesanan berdasarkan data yang tersimpan.
+- **Laporan**: Fungsi ekspor tersedia pada menu Pesanan untuk menghasilkan dokumen CSV guna keperluan audit keuangan.
 
-## 2. Alur Checkout Pelanggan
-1. Pelanggan memilih menu dan masuk ke halaman Checkout.
-2. Pelanggan mengisi Nama, WhatsApp, dan Lokasi (mendukung Google Maps Geolocation).
-3. Saat tombol **Order Sekarang** diklik:
-   - Data dikirim ke server via AJAX untuk dicatat ke database.
-   - Keranjang dikosongkan.
-   - Pelanggan diarahkan ke WhatsApp Admin dengan format pesan otomatis yang mencantumkan **ID Pesanan**.
+## Alur Transaksi Pelanggan
+1. Pemilihan produk melalui katalog digital.
+2. Proses checkout dengan pengisian data identitas dan koordinat lokasi.
+3. Sinkronisasi data: Sistem akan melakukan persistensi data ke database secara otomatis sebelum dialihkan ke antarmuka WhatsApp.
+4. Finalisasi: Pesan otomatis akan dikirimkan ke Admin dengan menyertakan ID Pesanan unik untuk validasi.
 
-## 3. Manajemen Catering
-- Jika muncul peringatan **"Bentrok"** di daftar catering, admin disarankan menghubungi salah satu pelanggan untuk negosiasi jam atau penyesuaian porsi.
+## Manajemen Catering
+Admin wajib memantau indikator bentrok jadwal pada daftar catering. Sistem memberikan peringatan visual jika terdapat pesanan pada tanggal yang sama untuk memudahkan koordinasi logistik dapur.
