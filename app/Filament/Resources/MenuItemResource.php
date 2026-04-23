@@ -66,19 +66,33 @@ class MenuItemResource extends Resource
                     ->required(),
             ])->columns(2),
 
-            Schemas\Section::make('Status & Label')->schema([
-                Forms\Toggle::make('available')
-                    ->label('Tersedia')
-                    ->default(true),
-                Forms\Toggle::make('is_best_seller')
-                    ->label('Best Seller'),
-                Forms\Toggle::make('is_favorite')
-                    ->label('Favorit'),
-                Forms\Toggle::make('is_recommended')
-                    ->label('Rekomendasi'),
-                Forms\Toggle::make('is_popular')
-                    ->label('Populer'),
-            ])->columns(5),
+            Schemas\Section::make('Status & Konfigurasi')
+                ->description('Atur ketersediaan dan label khusus untuk menu ini.')
+                ->schema([
+                    Forms\Grid::make(3)->schema([
+                        Forms\Toggle::make('available')
+                            ->label('Status Tersedia')
+                            ->helperText('Aktifkan agar menu muncul di katalog.')
+                            ->default(true)
+                            ->columnSpanFull(),
+                        
+                        Forms\Toggle::make('is_best_seller')
+                            ->label('Best Seller')
+                            ->inline(false),
+                        
+                        Forms\Toggle::make('is_favorite')
+                            ->label('Favorit')
+                            ->inline(false),
+                        
+                        Forms\Toggle::make('is_recommended')
+                            ->label('Rekomendasi')
+                            ->inline(false),
+                        
+                        Forms\Toggle::make('is_popular')
+                            ->label('Populer')
+                            ->inline(false),
+                    ])
+                ]),
         ]);
     }
 
