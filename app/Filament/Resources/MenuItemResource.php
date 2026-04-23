@@ -79,7 +79,7 @@ class MenuItemResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('image_url')
                     ->label('Foto')
-                    ->formatStateUsing(fn ($state) => new \Illuminate\Support\HtmlString("<img src='".asset($state)."' class='w-10 h-10 rounded-full object-cover shadow-sm'>")),
+                    ->formatStateUsing(fn ($state) => new \Illuminate\Support\HtmlString("<div class='w-12 h-12 overflow-hidden rounded-lg shadow-sm border border-gray-200'><img src='".asset($state)."' class='w-full h-full object-cover'></div>")),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
                     ->searchable()
