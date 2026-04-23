@@ -6,7 +6,7 @@ Dokumen ini menjelaskan arsitektur tingkat tinggi dari aplikasi De Roemah Makan.
 
 Aplikasi ini menggunakan pola **Monolith modern** dengan Laravel sebagai backend dan frontend (Blade), yang dibungkus dalam lingkungan **Docker** untuk konsistensi di berbagai perangkat.
 
-### Flow Diagram (High Level)
+### Flow Diagram
 
 ```mermaid
 graph TD
