@@ -26,13 +26,6 @@ services:
         networks:
             - deroemahmakan
 
-networks:
-    deroemahmakan:
-        driver: bridge
-
-volumes:
-    db_data:
-
     phpmyadmin:
         image: phpmyadmin:latest
         container_name: de_roemah_phpmyadmin
@@ -45,3 +38,10 @@ volumes:
             - "8081:80"
         networks:
             - deroemahmakan
+
+networks:
+    deroemahmakan:
+        driver: bridge
+
+volumes:
+    db_data:

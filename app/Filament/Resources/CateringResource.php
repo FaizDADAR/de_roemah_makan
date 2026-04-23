@@ -4,7 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CateringResource\Pages;
 use App\Models\Catering;
-use Filament\Forms;
+use Filament\Forms\Components as Forms;
+use Filament\Schemas\Components as Schemas;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
@@ -38,27 +39,27 @@ class CateringResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Forms\Components\Section::make('Informasi Catering')->schema([
-                Forms\Components\TextInput::make('customer_name')
+            Schemas\Section::make('Informasi Catering')->schema([
+                Forms\TextInput::make('customer_name')
                     ->label('Nama Pelanggan')
                     ->required(),
-                Forms\Components\TextInput::make('phone')
+                Forms\TextInput::make('phone')
                     ->label('Nomor HP')
                     ->required(),
-                Forms\Components\TextInput::make('people')
-                    ->label('Jumlah Orang')
+                Forms\TextInput::make('people')
+                    ->label('Jumlah Porsi')
                     ->numeric()
                     ->required(),
-                Forms\Components\DatePicker::make('date')
+                Forms\DatePicker::make('date')
                     ->label('Tanggal')
                     ->required(),
-                Forms\Components\TextInput::make('time')
+                Forms\TextInput::make('time')
                     ->label('Jam')
                     ->required(),
-                Forms\Components\Textarea::make('note')
+                Forms\Textarea::make('note')
                     ->label('Catatan')
                     ->rows(2),
-                Forms\Components\Select::make('status')
+                Forms\Select::make('status')
                     ->label('Status')
                     ->options([
                         'pending' => 'Pending',

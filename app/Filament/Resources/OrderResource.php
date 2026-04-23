@@ -4,7 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
-use Filament\Forms;
+use Filament\Forms\Components as Forms;
+use Filament\Schemas\Components as Schemas;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
@@ -26,22 +27,22 @@ class OrderResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Forms\Components\Section::make('Informasi Pesanan')->schema([
-                Forms\Components\TextInput::make('customer_name')
+            Schemas\Section::make('Informasi Pesanan')->schema([
+                Forms\TextInput::make('customer_name')
                     ->label('Nama Pelanggan')
                     ->required(),
-                Forms\Components\TextInput::make('phone')
+                Forms\TextInput::make('phone')
                     ->label('Nomor HP')
                     ->required(),
-                Forms\Components\Textarea::make('note')
+                Forms\Textarea::make('note')
                     ->label('Catatan')
                     ->rows(2),
-                Forms\Components\TextInput::make('total')
+                Forms\TextInput::make('total')
                     ->label('Total')
                     ->numeric()
                     ->prefix('Rp')
                     ->disabled(),
-                Forms\Components\Select::make('status')
+                Forms\Select::make('status')
                     ->label('Status')
                     ->options([
                         'pending' => 'Pending',

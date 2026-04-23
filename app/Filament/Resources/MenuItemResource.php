@@ -4,7 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MenuItemResource\Pages;
 use App\Models\MenuItem;
-use Filament\Forms;
+use Filament\Forms\Components as Forms;
+use Filament\Schemas\Components as Schemas;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
@@ -26,21 +27,21 @@ class MenuItemResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Forms\Components\Section::make('Informasi Menu')->schema([
-                Forms\Components\TextInput::make('name')
+            Schemas\Section::make('Informasi Menu')->schema([
+                Forms\TextInput::make('name')
                     ->label('Nama Menu')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('description')
+                Forms\Textarea::make('description')
                     ->label('Deskripsi')
                     ->required()
                     ->rows(3),
-                Forms\Components\TextInput::make('price')
+                Forms\TextInput::make('price')
                     ->label('Harga (Rp)')
                     ->required()
                     ->numeric()
                     ->prefix('Rp'),
-                Forms\Components\Select::make('category')
+                Forms\Select::make('category')
                     ->label('Kategori')
                     ->required()
                     ->options([
@@ -51,23 +52,23 @@ class MenuItemResource extends Resource
                         'Kerupuk' => 'Kerupuk',
                         'Minuman' => 'Minuman',
                     ]),
-                Forms\Components\TextInput::make('image_url')
+                Forms\TextInput::make('image_url')
                     ->label('URL Gambar')
                     ->required()
                     ->maxLength(500),
             ])->columns(2),
 
-            Forms\Components\Section::make('Status & Label')->schema([
-                Forms\Components\Toggle::make('available')
+            Schemas\Section::make('Status & Label')->schema([
+                Forms\Toggle::make('available')
                     ->label('Tersedia')
                     ->default(true),
-                Forms\Components\Toggle::make('is_best_seller')
+                Forms\Toggle::make('is_best_seller')
                     ->label('Best Seller'),
-                Forms\Components\Toggle::make('is_favorite')
+                Forms\Toggle::make('is_favorite')
                     ->label('Favorit'),
-                Forms\Components\Toggle::make('is_recommended')
+                Forms\Toggle::make('is_recommended')
                     ->label('Rekomendasi'),
-                Forms\Components\Toggle::make('is_popular')
+                Forms\Toggle::make('is_popular')
                     ->label('Populer'),
             ])->columns(5),
         ]);
