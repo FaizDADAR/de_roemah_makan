@@ -10,6 +10,8 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
+use Filament\Forms\Components\FileUpload;
 
 class MenuItemResource extends Resource
 {
@@ -52,10 +54,16 @@ class MenuItemResource extends Resource
                         'Kerupuk' => 'Kerupuk',
                         'Minuman' => 'Minuman',
                     ]),
-                Forms\TextInput::make('image_url')
-                    ->label('URL Gambar')
-                    ->required()
-                    ->maxLength(500),
+                FileUpload::make('image_url')
+                    ->label('Foto Menu')
+                    ->image()
+                    ->directory('images/menu')
+                    ->disk('menu_images')
+                    ->getUploadedFileNameForStorageUsing(function (FileUpload $component, $file, $record, $get) {
+                        $name = $get('name') ?? 'menu';
+                        return Str::slug($name) . '.' . $file->getClientOriginalExtension();
+                    })
+                    ->required(),
             ])->columns(2),
 
             Schemas\Section::make('Status & Label')->schema([

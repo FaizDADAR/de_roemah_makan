@@ -21,6 +21,16 @@ class Catering extends Model
         'date' => 'date',
     ];
 
+    public function items()
+    {
+        return $this->hasMany(CateringItem::class);
+    }
+
+    public function getTotalPriceAttribute(): int
+    {
+        return $this->items->sum(fn ($item) => $item->price * $item->qty);
+    }
+
     /**
      * Label status dengan warna
      */
