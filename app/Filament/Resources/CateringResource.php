@@ -2,21 +2,33 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BookingResource\Pages;
-use App\Models\Booking;
+use App\Filament\Resources\CateringResource\Pages;
+use App\Models\Catering;
 use Filament\Forms;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class BookingResource extends Resource
+class CateringResource extends Resource
 {
-    protected static ?string $model = Booking::class;
+    protected static ?string $model = Catering::class;
     protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-calendar-days';
-    protected static ?string $navigationLabel = 'Booking';
-    protected static ?string $modelLabel = 'Booking';
+    protected static ?string $navigationLabel = 'Catering';
+    protected static ?string $modelLabel = 'Catering';
     protected static ?int $navigationSort = 3;
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::where('status', 'pending')
+            ->whereBetween('date', [now(), now()->addDays(3)])
+            ->count() ?: null;
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'danger';
+    }
 
     public static function getNavigationGroup(): ?string
     {
@@ -26,7 +38,7 @@ class BookingResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Forms\Components\Section::make('Informasi Booking')->schema([
+            Forms\Components\Section::make('Informasi Catering')->schema([
                 Forms\Components\TextInput::make('customer_name')
                     ->label('Nama Pelanggan')
                     ->required(),
@@ -77,7 +89,17 @@ class BookingResource extends Resource
                 Tables\Columns\TextColumn::make('date')
                     ->label('Tanggal')
                     ->date('d/m/Y')
-                    ->sortable(),
+                    ->sortable()
+                    ->description(fn ($record) => 
+                        Catering::where('date', $record->date)->where('id', '!=', $record->id)->count() > 0 
+                        ? '⚠️ Bentrok dengan pesanan lain!' 
+                        : (now()->diffInDays($record->date, false) <= 3 && now()->diffInDays($record->date, false) >= 0 ? '⏰ Segera diantar!' : null)
+                    )
+                    ->color(fn ($record) => 
+                        Catering::where('date', $record->date)->where('id', '!=', $record->id)->count() > 0 
+                        ? 'danger' 
+                        : (now()->diffInDays($record->date, false) <= 3 && now()->diffInDays($record->date, false) >= 0 ? 'warning' : null)
+                    ),
                 Tables\Columns\TextColumn::make('time')
                     ->label('Jam'),
                 Tables\Columns\TextColumn::make('status')
@@ -115,8 +137,8 @@ class BookingResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBookings::route('/'),
-            'edit' => Pages\EditBooking::route('/{record}/edit'),
+            'index' => Pages\ListCaterings::route('/'),
+            'edit' => Pages\EditCatering::route('/{record}/edit'),
         ];
     }
 }

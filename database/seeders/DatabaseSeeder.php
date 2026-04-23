@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         // Buat admin user untuk Filament
         User::factory()->create([
-            'name' => 'Admin De Roemah Makan',
-            'email' => 'raihansql.dev@gmail.com',
-            'password' => bcrypt('password123'),
+            'name' => 'masfaiz',
+            'email' => '',
+            'password' => bcrypt(''),
         ]);
 
         // Seed menu items

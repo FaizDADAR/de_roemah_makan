@@ -25,7 +25,7 @@
             $navLinks = [
                 ['label' => 'Beranda', 'route' => 'home'],
                 ['label' => 'Menu', 'route' => 'menu'],
-                ['label' => 'Booking', 'route' => 'booking.create'],
+                ['label' => 'Catering', 'route' => 'catering.create'],
                 ['label' => 'Status Pesanan', 'route' => 'status.index'],
             ];
         @endphp

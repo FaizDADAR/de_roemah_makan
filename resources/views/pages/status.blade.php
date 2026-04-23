@@ -5,7 +5,7 @@
 @section('content')
 <div class="max-w-2xl mx-auto">
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-gray-800">Status Pesanan & Booking</h1>
+        <h1 class="text-2xl font-bold text-gray-800">Status Pesanan & Catering</h1>
         <p class="text-sm text-gray-500 mt-1">Masukkan nomor HP untuk melihat status</p>
     </div>
 
@@ -22,11 +22,11 @@
     </form>
 
     @if(isset($phone))
-        @if((!isset($orders) || $orders->isEmpty()) && (!isset($bookings) || $bookings->isEmpty()))
+        @if((!isset($orders) || $orders->isEmpty()) && (!isset($caterings) || $caterings->isEmpty()))
             <div class="flex flex-col items-center py-16 gap-3 text-gray-400">
                 <svg class="w-10 h-10 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <p class="font-medium">Tidak ada data ditemukan</p>
-                <p class="text-sm">Nomor HP <strong>{{ $phone }}</strong> belum memiliki pesanan atau booking</p>
+                <p class="text-sm">Nomor HP <strong>{{ $phone }}</strong> belum memiliki pesanan atau catering</p>
             </div>
         @endif
 
@@ -76,46 +76,46 @@
             </section>
         @endif
 
-        {{-- Bookings --}}
-        @if(isset($bookings) && $bookings->isNotEmpty())
+        {{-- Caterings --}}
+        @if(isset($caterings) && $caterings->isNotEmpty())
             <section>
                 <h2 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
                     <svg class="w-[18px] h-[18px]" style="color: #8B5E3C;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    Booking ({{ $bookings->count() }})
+                    Catering ({{ $caterings->count() }})
                 </h2>
                 <div class="flex flex-col gap-3">
-                    @foreach($bookings as $booking)
+                    @foreach($caterings as $catering)
                         @php
                             $statusColors = [
                                 'pending' => ['bg' => '#fef9c3', 'text' => '#854d0e', 'label' => 'Pending'],
                                 'dikonfirmasi' => ['bg' => '#dcfce7', 'text' => '#16a34a', 'label' => 'Dikonfirmasi'],
                             ];
-                            $s = $statusColors[$booking->status] ?? $statusColors['pending'];
+                            $s = $statusColors[$catering->status] ?? $statusColors['pending'];
                         @endphp
                         <div class="bg-white rounded-2xl p-5 shadow-sm" style="border: 1px solid #F0E8DF;">
                             <div class="flex items-start justify-between mb-3">
                                 <div>
-                                    <p class="font-semibold text-gray-800">{{ $booking->customer_name }}</p>
-                                    <p class="text-xs text-gray-400 font-mono mt-0.5">#{{ str_pad($booking->id, 6, '0', STR_PAD_LEFT) }}</p>
+                                    <p class="font-semibold text-gray-800">{{ $catering->customer_name }}</p>
+                                    <p class="text-xs text-gray-400 font-mono mt-0.5">#{{ str_pad($catering->id, 6, '0', STR_PAD_LEFT) }}</p>
                                 </div>
                                 <span class="badge-status" style="background: {{ $s['bg'] }}; color: {{ $s['text'] }};">{{ $s['label'] }}</span>
                             </div>
                             <div class="grid grid-cols-3 gap-3">
                                 <div class="flex flex-col gap-0.5">
                                     <span class="text-xs text-gray-400 flex items-center gap-1">📅 Tanggal</span>
-                                    <span class="text-sm font-medium text-gray-700">{{ $booking->date->format('d/m/Y') }}</span>
+                                    <span class="text-sm font-medium text-gray-700">{{ $catering->date->format('d/m/Y') }}</span>
                                 </div>
                                 <div class="flex flex-col gap-0.5">
                                     <span class="text-xs text-gray-400 flex items-center gap-1">🕐 Jam</span>
-                                    <span class="text-sm font-medium text-gray-700">{{ $booking->time }}</span>
+                                    <span class="text-sm font-medium text-gray-700">{{ $catering->time }}</span>
                                 </div>
                                 <div class="flex flex-col gap-0.5">
                                     <span class="text-xs text-gray-400 flex items-center gap-1">👥 Orang</span>
-                                    <span class="text-sm font-medium text-gray-700">{{ $booking->people }} orang</span>
+                                    <span class="text-sm font-medium text-gray-700">{{ $catering->people }} orang</span>
                                 </div>
                             </div>
-                            @if($booking->note)
-                                <p class="text-xs text-gray-400 mt-3 italic">Catatan: {{ $booking->note }}</p>
+                            @if($catering->note)
+                                <p class="text-xs text-gray-400 mt-3 italic">Catatan: {{ $catering->note }}</p>
                             @endif
                         </div>
                     @endforeach

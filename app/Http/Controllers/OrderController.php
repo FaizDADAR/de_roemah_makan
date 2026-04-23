@@ -21,11 +21,14 @@ class OrderController extends Controller
         $validated = $request->validate([
             'customer_name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
-            'note' => 'nullable|string|max:500',
+            'note' => 'nullable|string|max:1000',
         ]);
 
         $cart = session('cart', []);
         if (empty($cart)) {
+            if ($request->wantsJson()) {
+                return response()->json(['message' => 'Keranjang kosong'], 422);
+            }
             return back()->with('error', 'Keranjang kosong!');
         }
 
@@ -50,6 +53,14 @@ class OrderController extends Controller
 
         // Kosongkan keranjang
         session()->forget('cart');
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Pesanan berhasil dicatat',
+                'order_id' => str_pad($order->id, 6, '0', STR_PAD_LEFT)
+            ]);
+        }
 
         return redirect()->route('checkout.create')
             ->with('success', 'Pesanan berhasil dibuat!')

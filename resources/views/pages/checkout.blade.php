@@ -100,6 +100,18 @@
                                 <svg class="w-4 h-4" style="color: #8B5E3C;" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                Nomor WhatsApp (HP) *
+                            </label>
+                            <input type="tel" id="phone" placeholder="Contoh: 08123456789" class="input-field" required>
+                        </div>
+
+                        <div class="flex flex-col gap-1.5">
+                            <label class="flex items-center gap-1.5 text-sm font-medium text-gray-700">
+                                <svg class="w-4 h-4" style="color: #8B5E3C;" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
                                     </path>
                                 </svg>
@@ -219,44 +231,58 @@
                         }
 
                         const name = document.getElementById('customer_name').value;
+                        const phone = document.getElementById('phone').value;
                         const address = document.getElementById('address').value;
                         const note = document.getElementById('note').value;
 
-                        let itemsText = '';
-                        cartData.cart.forEach(item => {
-                            itemsText += `- ${item.name} x${item.qty}\n`;
-                        });
-
-                        let message = `Halo Admin De Roemah Makan,\n\nSaya ingin memesan:\n\n${itemsText}\nNama: ${name}\nLokasi: ${address}`;
-
-                        if (note) {
-                            message += `\nCatatan: ${note}`;
-                        }
-
-                        message += `\n\nMohon konfirmasi pesanan saya.\nTerima kasih.`;
-
-                        // URL WA
-                        const adminPhone = '6283172550797';
-                        const waUrl = `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`;
-
-                        showToast('Pesanan berhasil dibuat! Mengalihkan ke WhatsApp...', 'success');
-
-                        // Clear the cart on the server (simulating success creation)
                         try {
-                            await fetch('/cart/clear', {
+                            // Record the order first
+                            const response = await fetch('{{ route("checkout.store") }}', {
                                 method: 'POST',
-                                headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' },
+                                headers: { 
+                                    'Content-Type': 'application/json', 
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    'Accept': 'application/json' 
+                                },
+                                body: JSON.stringify({
+                                    customer_name: name,
+                                    phone: phone,
+                                    note: `Alamat: ${address}${note ? '\nCatatan: ' + note : ''}`
+                                })
                             });
-                            cartData = { cart: [], totalItems: 0, totalPrice: 0 };
-                            updateCartUI();
-                        } catch (e) {
-                            console.error('Failed clearing cart');
-                        }
 
-                        // Redirect ke WA
-                        setTimeout(() => {
-                            window.location.href = waUrl;
-                        }, 1500);
+                            if (!response.ok) throw new Error('Gagal mencatat pesanan');
+                            
+                            const result = await response.json();
+
+                            let itemsText = '';
+                            cartData.cart.forEach(item => {
+                                itemsText += `- ${item.name} x${item.qty}\n`;
+                            });
+
+                            let message = `Halo Admin De Roemah Makan,\n\nSaya ingin memesan (Order #${result.order_id}):\n\n${itemsText}\nNama: ${name}\nLokasi: ${address}`;
+
+                            if (note) {
+                                message += `\nCatatan: ${note}`;
+                            }
+
+                            message += `\n\nMohon konfirmasi pesanan saya.\nTerima kasih.`;
+
+                            // URL WA
+                            const adminPhone = '6283172550797';
+                            const waUrl = `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`;
+
+                            showToast('Pesanan berhasil dicatat! Mengalihkan ke WhatsApp...', 'success');
+
+                            // Redirect to success page or WhatsApp
+                            setTimeout(() => {
+                                window.location.href = waUrl;
+                            }, 1500);
+
+                        } catch (err) {
+                            console.error(err);
+                            showToast('Terjadi kesalahan saat memproses pesanan.', 'error');
+                        }
                     });
                 }
 

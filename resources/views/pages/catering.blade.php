@@ -1,35 +1,35 @@
 @extends('layouts.app')
 
-@section('title', 'Booking Meja - De Roemah Makan')
+@section('title', 'Catering Meja - De Roemah Makan')
 
 @section('content')
 <div class="max-w-lg mx-auto">
 
     {{-- Success State --}}
-    @if(session('success') && session('booking'))
-        @php $booking = session('booking'); @endphp
+    @if(session('success') && session('catering'))
+        @php $catering = session('catering'); @endphp
         <div class="flex flex-col items-center justify-center py-20 gap-4 text-center">
             <div class="w-20 h-20 rounded-full flex items-center justify-center" style="background: #dcfce7;">
                 <svg class="w-10 h-10" style="color: #16a34a;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </div>
-            <h2 class="text-2xl font-bold text-gray-800">Booking Berhasil!</h2>
+            <h2 class="text-2xl font-bold text-gray-800">Catering Berhasil!</h2>
             <p class="text-gray-500 text-sm">
-                Terima kasih, <strong>{{ $booking->customer_name }}</strong>! Booking Anda sedang diproses.
-                Kami akan menghubungi Anda di nomor <strong>{{ $booking->phone }}</strong> untuk konfirmasi.
+                Terima kasih, <strong>{{ $catering->customer_name }}</strong>! Catering Anda sedang diproses.
+                Kami akan menghubungi Anda di nomor <strong>{{ $catering->phone }}</strong> untuk konfirmasi.
             </p>
-            <a href="{{ route('booking.create') }}" class="mt-2 px-6 py-3 rounded-xl font-semibold text-white transition hover:opacity-90" style="background: #8B5E3C;">
-                Booking Lagi
+            <a href="{{ route('catering.create') }}" class="mt-2 px-6 py-3 rounded-xl font-semibold text-white transition hover:opacity-90" style="background: #8B5E3C;">
+                Catering Lagi
             </a>
         </div>
     @else
 
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-gray-800">Booking Meja</h1>
+        <h1 class="text-2xl font-bold text-gray-800">Catering Meja</h1>
         <p class="text-sm text-gray-500 mt-1">Reservasi tempat duduk untuk kenyamanan Anda</p>
     </div>
 
     <div class="bg-white rounded-2xl p-6 shadow-sm" style="border: 1px solid #F0E8DF;">
-        <form action="{{ route('booking.store') }}" method="POST" class="flex flex-col gap-4">
+        <form action="{{ route('catering.store') }}" method="POST" class="flex flex-col gap-4">
             @csrf
 
             {{-- Nama --}}
@@ -52,11 +52,11 @@
                 @error('phone') <p class="text-xs text-red-500">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Jumlah Orang --}}
+            {{-- Jumlah Porsi --}}
             <div class="flex flex-col gap-1.5">
                 <label class="flex items-center gap-1.5 text-sm font-medium text-gray-700">
                     <svg class="w-4 h-4" style="color: #8B5E3C;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    Jumlah Orang *
+                    Jumlah Porsi *
                 </label>
                 <select name="people" class="input-field" required>
                     <option value="">Pilih jumlah orang</option>
@@ -97,17 +97,17 @@
             </div>
 
             <button type="submit" class="btn-primary w-full mt-2">
-                Booking Sekarang
+                Catering Sekarang
             </button>
         </form>
     </div>
 
     {{-- Info --}}
     <div class="mt-4 p-4 rounded-2xl text-sm" style="background: #FBF7F4; border: 1px solid #F0E8DF;">
-        <p class="font-semibold mb-1" style="color: #8B5E3C;">ℹ️ Informasi Booking</p>
+        <p class="font-semibold mb-1" style="color: #8B5E3C;">ℹ️ Informasi Catering</p>
         <ul class="text-gray-500 space-y-1 text-xs">
             <li>• Konfirmasi akan dikirim via WhatsApp</li>
-            <li>• Booking berlaku 15 menit setelah jam yang ditentukan</li>
+            <li>• Catering berlaku 15 menit setelah jam yang ditentukan</li>
             <li>• Jam buka: 08.00 – 21.00 WIB</li>
         </ul>
     </div>

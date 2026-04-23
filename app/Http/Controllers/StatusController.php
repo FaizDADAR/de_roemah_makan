@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\Booking;
+use App\Models\Catering;
 use Illuminate\Http\Request;
 
 class StatusController extends Controller
@@ -25,10 +25,10 @@ class StatusController extends Controller
             ->orderByDesc('created_at')
             ->get();
 
-        $bookings = Booking::where('phone', $phone)
+        $caterings = Catering::where('phone', $phone)
             ->orderByDesc('created_at')
             ->get();
 
-        return view('pages.status', compact('orders', 'bookings', 'phone'));
+        return view('pages.status', compact('orders', 'caterings', 'phone'));
     }
 }
