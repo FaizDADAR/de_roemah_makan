@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="De Roemah Makan - Restoran masakan Nusantara dengan aneka hidangan lezat. Pesan online dan booking meja dengan mudah.">
+    <meta name="description" content="De Roemah Makan - Restoran masakan Nusantara dengan aneka hidangan lezat. Pesan online dan catering dengan mudah.">
     <title>@yield('title', 'De Roemah Makan - Masakan Nusantara')</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

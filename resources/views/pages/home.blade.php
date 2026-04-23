@@ -18,7 +18,7 @@
                     <span style="color: #F5E6D3;">De Roemah Makan</span>
                 </h1>
                 <p class="text-white/80 text-sm md:text-base mb-6 leading-relaxed">
-                    Nikmati aneka hidangan Nusantara, pesan mudah &amp; booking tempat praktis
+                    Nikmati aneka hidangan Nusantara, pesan mudah &amp; catering praktis
                 </p>
                 <div class="flex flex-wrap gap-3">
                     <a href="{{ route('menu') }}"
@@ -26,10 +26,10 @@
                         style="background: #fff; color: #8B5E3C;">
                         Pesan Sekarang
                     </a>
-                    <a href="{{ route('booking.create') }}"
+                    <a href="{{ route('catering.create') }}"
                         class="px-6 py-3 rounded-xl font-semibold text-sm transition border"
                         style="border-color: rgba(255,255,255,0.5); color: #fff;">
-                        Booking Meja
+                        Pesan Catering
                     </a>
                 </div>
             </div>
