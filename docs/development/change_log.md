@@ -7,10 +7,17 @@ Histori teknis mengenai perbaikan bug, penambahan fitur, dan optimasi sistem De 
 ### Infrastruktur dan Database
 - **Integrasi phpMyAdmin**: Penambahan layanan phpMyAdmin pada konfigurasi Docker Compose untuk memudahkan manajemen database secara visual melalui port 8081.
 - **Perbaikan Konfigurasi YAML**: Optimalisasi struktur file docker-compose.yml untuk memastikan seluruh layanan berjalan secara sinkron.
+- **Skema Catering Baru**: Implementasi tabel `catering_items` untuk mendukung penyimpanan detail menu dalam setiap pesanan catering.
 
 ### Panel Admin
+- **Otomatisasi Gambar**: Implementasi fitur upload gambar dengan penamaan otomatis (slugify) berbasis nama menu. Gambar kini disimpan langsung ke direktori `public/images/menu`.
+- **Optimalisasi Layout**: Pembaruan antarmuka pada seksi "Status & Konfigurasi" menggunakan grid 3 kolom dan penataan vertikal untuk estetika yang lebih bersih.
 - **Resolusi Namespace**: Perbaikan galat Class Not Found pada komponen EditAction dan DeleteAction dengan mengimplementasikan pemanggilan namespace absolut.
 - **Standarisasi Visual**: Penyesuaian dimensi gambar pada tabel menu menjadi ukuran statis 48px dengan properti object-cover untuk estetika yang konsisten.
+
+### Layanan Catering
+- **Interaksi Interaktif**: Redesain halaman catering dengan grid menu dan fitur **Custom Numberpad** untuk pemilihan jumlah porsi yang lebih intuitif.
+- **Estimasi Real-time**: Implementasi penghitungan total item dan harga secara langsung menggunakan Alpine.js.
 
 ### Frontend
 - **Koreksi Rute**: Perbaikan galat rute pada halaman beranda pasca-refaktor modul Catering untuk mencegah kegagalan pemuatan halaman.

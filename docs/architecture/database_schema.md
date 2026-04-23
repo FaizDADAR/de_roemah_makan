@@ -8,6 +8,8 @@ Dokumen ini merinci skema database secara teknis untuk keperluan pengembangan da
 erDiagram
     MENU_ITEM ||--o{ ORDER_ITEM : "ordered in"
     ORDER ||--|{ ORDER_ITEM : "contains"
+    MENU_ITEM ||--o{ CATERING_ITEM : "ordered in"
+    CATERING ||--|{ CATERING_ITEM : "contains"
     USER ||--o{ ORDER : "manages"
     CATERING }|--|| USER : "reviewed by"
 ```
@@ -42,7 +44,7 @@ Header transaksi pemesanan reguler.
 | `note` | text | Yes | | Catatan tambahan / Alamat |
 
 ### 3. `order_items`
-Detail item dalam satu pesanan (Line Items).
+Detail item dalam satu pesanan reguler (Line Items).
 
 | Column | Type | Nullable | Default | Description |
 | :--- | :--- | :--- | :--- | :--- |
@@ -65,6 +67,18 @@ Manajemen pesanan porsi besar (Catering).
 | `date` | date | No | | Tanggal pengantaran |
 | `time` | string | No | | Jam pengantaran |
 | `status` | enum | No | pending | pending, dikonfirmasi |
+
+### 5. `catering_items`
+Detail item dalam satu pesanan catering.
+
+| Column | Type | Nullable | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `id` | bigint (PK) | No | | Auto Increment |
+| `catering_id` | bigint (FK) | No | | Relasi ke `caterings.id` |
+| `menu_item_id` | bigint (FK) | No | | Relasi ke `menu_items.id` |
+| `name` | string | No | | Snapshot nama saat dipesan |
+| `price` | integer | No | | Snapshot harga saat dipesan |
+| `qty` | integer | No | 1 | Jumlah porsi item |
 
 ## Database Best Practices
 - **Soft Deletes**: (TBD) Akan diimplementasikan pada fase audit.
