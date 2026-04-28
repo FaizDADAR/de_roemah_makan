@@ -69,7 +69,7 @@ class MenuItemResource extends Resource
             Schemas\Section::make('Status & Konfigurasi')
                 ->description('Atur ketersediaan dan label khusus untuk menu ini.')
                 ->schema([
-                    Forms\Grid::make(3)->schema([
+                    Schemas\Grid::make(3)->schema([
                         Forms\Toggle::make('available')
                             ->label('Status Tersedia')
                             ->helperText('Aktifkan agar menu muncul di katalog.')
