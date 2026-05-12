@@ -91,16 +91,25 @@ class CateringResource extends Resource
                     ->label('Tanggal')
                     ->date('d/m/Y')
                     ->sortable()
-                    ->description(fn ($record) => 
-                        Catering::where('date', $record->date)->where('id', '!=', $record->id)->count() > 0 
-                        ? '⚠️ Bentrok dengan pesanan lain!' 
-                        : (now()->diffInDays($record->date, false) <= 3 && now()->diffInDays($record->date, false) >= 0 ? '⏰ Segera diantar!' : null)
-                    )
-                    ->color(fn ($record) => 
-                        Catering::where('date', $record->date)->where('id', '!=', $record->id)->count() > 0 
-                        ? 'danger' 
-                        : (now()->diffInDays($record->date, false) <= 3 && now()->diffInDays($record->date, false) >= 0 ? 'warning' : null)
-                    ),
+                    ->description(function ($record) {
+                        $bentrok = Catering::where('date', $record->date)->where('id', '!=', $record->id)->count() > 0;
+                        if ($bentrok) return '⚠️ Bentrok dengan pesanan lain!';
+                        
+                        $days = (int) now()->startOfDay()->diffInDays(\Carbon\Carbon::parse($record->date)->startOfDay(), false);
+                        if ($days >= 0 && $days <= 3) {
+                            $hText = $days == 0 ? 'Hari Ini' : 'H-'.$days;
+                            return '⚠️ Siapkan Bahan! (' . $hText . ')';
+                        }
+                        return null;
+                    })
+                    ->color(function ($record) {
+                        $bentrok = Catering::where('date', $record->date)->where('id', '!=', $record->id)->count() > 0;
+                        if ($bentrok) return 'danger';
+                        
+                        $days = (int) now()->startOfDay()->diffInDays(\Carbon\Carbon::parse($record->date)->startOfDay(), false);
+                        if ($days >= 0 && $days <= 3) return 'warning';
+                        return null;
+                    }),
                 Tables\Columns\TextColumn::make('time')
                     ->label('Jam'),
                 Tables\Columns\TextColumn::make('status')

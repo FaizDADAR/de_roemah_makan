@@ -8,9 +8,7 @@
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </button>
         <a href="{{ route('home') }}" class="flex items-center gap-2.5">
-            <div class="w-9 h-9 rounded-xl flex items-center justify-center shadow-sm" style="background: rgba(255,255,255,0.18);">
-                <svg class="w-[18px] h-[18px] text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-            </div>
+            <img src="{{ asset('images/logo.png') }}" alt="Logo DRM" class="w-10 h-10 object-contain drop-shadow-md rounded-lg">
             <div class="hidden sm:block">
                 <span class="font-bold text-white text-base tracking-tight leading-none block">De Roemah Makan</span>
                 <span class="text-white/60 text-[10px] leading-none">Masakan Nusantara</span>

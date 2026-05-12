@@ -14,7 +14,7 @@
             </div>
             <h2 class="text-2xl font-bold text-gray-800">Pesanan Terkirim!</h2>
             <p class="text-gray-500 text-sm max-w-sm">
-                Terima kasih, <strong>{{ $catering->customer_name }}</strong>! Kami telah mencatat pesanan catering Anda.
+                Terima kasih, <strong>{{ is_array($catering) ? $catering['customer_name'] : $catering->customer_name }}</strong>! Kami telah mencatat pesanan catering Anda.
             </p>
             <a href="{{ route('catering.create') }}" class="mt-2 px-6 py-3 rounded-xl font-semibold text-white transition hover:scale-105" style="background: #8B5E3C;">
                 Pesan Lagi

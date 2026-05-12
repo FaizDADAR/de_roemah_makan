@@ -122,14 +122,7 @@ class MenuItemSeeder extends Seeder
                 'image_url' => '',
                 'available' => true,
             ],
-            [
-                'name' => 'Kerupuk Bawang',
-                'description' => 'Kerupuk bawang gurih dan renyah',
-                'price' => 2500,
-                'category' => 'Kerupuk',
-                'image_url' => '',
-                'available' => true,
-            ],
+
             [
                 'name' => 'Es Teh Manis',
                 'description' => 'Teh manis segar dengan es batu pilihan',
